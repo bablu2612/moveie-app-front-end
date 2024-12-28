@@ -1,0 +1,114 @@
+.blocks {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #093545;
+
+    h1 {
+
+        font-family: Montserrat;
+        font-size: 64px;
+        font-weight: 600;
+        line-height: 80px;
+        text-align: center;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+        color: #FFFFFF;
+        margin: 0 0 40px;
+
+    }
+    form{
+        width: 100%;
+        max-width: 300px;
+        > div{
+            margin-bottom: 24px;
+            width: 100%;
+            text-align: center;
+           
+        }
+        .remenberCheckbox{
+            input{
+                position: relative;
+                width: 18px;
+                height: 18px;
+                appearance: none;
+                background: #224957;
+                border-radius: 5px;
+                margin: 0 8px 0 0;
+                cursor: pointer;
+                top: 4px;
+                &:after{
+                    content: '';
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    border-radius: 5px;
+                }
+                &:checked{
+                    &:after{
+                        background-color: #2bd17e;
+                    }
+                    &:before{
+                        content: '✓';
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        border-radius: 5px;
+                        z-index: 1;
+                        font-size: 15px;
+                        top: 0;
+                        color: #093545;
+                        font-weight: bold;
+                        padding-left: 3px;
+                    }
+                }
+
+            }
+            label{                      
+                font-family: Montserrat;
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 24px;
+                text-align: center;
+                text-underline-position: from-font;
+                text-decoration-skip-ink: none;
+                color: #ffffff;
+                 
+            }
+    }
+            input[type="text"]{
+                height: 45px;
+                background-color: #224957;
+                border-radius: 10px;
+                border: 0;
+                padding: 11px 16px; 
+                width: 100%; 
+                outline: unset;
+                color: #ffffff;
+              
+                font-family: Montserrat;
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 24px;
+                text-align: left;
+                text-underline-position: from-font;
+                text-decoration-skip-ink: none;
+
+                &::placeholder{
+                    color: #ffffff;
+                }
+            }
+    }
+    .bottomWaves {
+        position: absolute;
+        bottom: 0;
+        overflow: hidden;
+        img{
+            width: 100%;
+            position: relative;
+            top: 6px;
+        }
+    }
+}

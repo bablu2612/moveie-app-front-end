@@ -5,7 +5,8 @@ import { loginSubmit } from "../../Reducer/MovieSlice";
 import { Form, Field } from 'react-final-form'
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
-
+import css from './LoginStyle.css'
+import wavesImage from '../../Assets/bottmwaves.png'
 const Login = ({setToken}) => {
   const dispatch = useDispatch()
   const navigate=useNavigate()
@@ -33,6 +34,7 @@ const Login = ({setToken}) => {
   }
     return(
       <>
+      <div className="blocks">
       {message ? (toast({message})):""}
        {/* <ToastContainer /> */}
       <h1>Sign in</h1>
@@ -41,7 +43,7 @@ const Login = ({setToken}) => {
             // validate={validate}
             render={({ handleSubmit }) => (
               <form onSubmit={handleSubmit}>
-                <h2>Sign in</h2>
+               
                 <div className="Email_container">
                 <Field name="email">
                   {({ input, meta }) => (
@@ -63,7 +65,7 @@ const Login = ({setToken}) => {
                     )}
                   </Field>
                 </div>
-                <div className="Password_container">
+                <div className="remenberCheckbox">
                   <Field name="remember_me" >
                     {({ input, meta }) => (
                       <div>
@@ -75,11 +77,15 @@ const Login = ({setToken}) => {
                   </Field>
                 </div>
                 <div className="Submit_container">
-                  <button type="submit">Submit</button>
+                  <button type="submit" className="primaryButton">Login</button>
                 </div>
               </form>
             )}
           />
+          <div className="bottomWaves">
+          <img src={wavesImage}/>
+          </div>
+          </div>
       </>
     )
 
