@@ -39,20 +39,32 @@
   }
 }
 
-button.primaryButton {
-  background: #2BD17E;
+button{
+  cursor: pointer;
   border: 0;
-  border-radius: 10px;
-  height: 54px;
-  width: 100%;
- 
-font-family: Montserrat;
-font-size: 16px;
-font-weight: 700;
-line-height: 24px;
-text-align: center;
-text-underline-position: from-font;
-text-decoration-skip-ink: none;
-color: #ffffff;
-
+    border-radius: 10px;
+    height: 54px;
+    width: 100%;
+   
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #ffffff;
+  &.primaryButton {
+    background: #2BD17E;
+    
+  
+  }
+  &.secondryButton {
+    background: transparent;
+    border: 1px solid #fff;
+    
+    color: #ffffff;
+  }
 }
+
+

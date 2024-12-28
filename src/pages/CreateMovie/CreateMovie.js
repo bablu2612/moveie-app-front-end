@@ -5,7 +5,7 @@ import { createMovie, loginSubmit } from "../../Reducer/MovieSlice";
 import { Form, Field } from 'react-final-form';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
-
+import uploadIcon from '../../Assets/file_download_black_24dp 1.png'
 const CreateMovie = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -40,68 +40,99 @@ const CreateMovie = () => {
     formdata.set("poster", posterFile);
     await dispatch(createMovie(formdata));
   };
-
   return (
     <>
-      <Form
-        onSubmit={onSubmit}
-        render={({ handleSubmit, form, values }) => (
-          <form onSubmit={handleSubmit}>
-            <h2>Create a new movie</h2>
-            <div className="Poster_container">
-              <Field name="poster">
-                {({ input, meta }) => (
-                  <div>
-                    <input
-                      type="file"
-                      {...input}
-                      onChange={(e) => handleFileChange(e, form)}
-                      accept="image/*"
-                    />
-                    {meta.touched && meta.error && <span>{meta.error}</span>}
-                  </div>
-                )}
-              </Field>
+      {/* {message ? (toast({message})):""} */}
+      <div className="blocks createNewMovies">
+        <Form
+          onSubmit={onSubmit}
+          // validate={validate}
+          render={({ handleSubmit, form, values }) => (
+            <form onSubmit={handleSubmit}>
+              <h2>Create a new movie</h2>
+              <div className="uploadImageBlock">
+              <div className="Poster_container">
+                <Field name="poster">
+                  {({ input, meta }) => (
+                    <div className="uploadImageBoxDrag">
+                      {/* <input
+                        type="file"
+                        {...input}
+                        onChange={(e) => handleFileChange(e, form)}
+                        accept="image/*"
+                      /> */}
+                      <input
+                        type="file"
+                        
+                        {...input}
+                        onChange={(e) => handleFileChange(e, form)}
+                        accept="image/*"                    
+                        id="fileUpload"
+                      />
+                      <label htmlFor="fileUpload">
+                        <img src={uploadIcon}/>
+                        Drop an image here</label>
+                      {meta.touched && meta.error && <span>{meta.error}</span>}
+                     
+                    </div>
+                  )}
+                </Field>
+                <Field name="poster">
+                  {({ input }) => (
+                    <div className="uploadedImage">
+                      {posterFile && (
+                        <img
+                          src={URL.createObjectURL(posterFile)}
+                          alt="Poster preview"
+                        />
+                      )}
+                    </div>
+                  )}
+                </Field>
+              </div>
+              <div className="Submit_container">
+                <button type="submit" className="secondryButton">Cancel</button>
+                <button type="submit" className="primaryButton">Submit</button>
+              </div>
+              </div>
 
-              {posterFile && (
-                <div>
-                  <img
-                    src={URL.createObjectURL(posterFile)}
-                    alt="Poster preview"
-                    style={{ maxWidth: "200px", maxHeight: "300px", marginTop: "10px" }}
-                  />
-                </div>
-              )}
-            </div>
+              <div className="uploadFieldsBlock">
+              <div className="Title_container">
+                <Field name="title">
+                  {({ input, meta }) => (
+                    <div>
+                      <input type="text" {...input} placeholder="Title" />
+                      {meta.touched && meta.error && <span>{meta.error}</span>}
+                    </div>
+                  )}
+                </Field>
+              </div>
+              <div className="Year_container">
+                <Field name="year">
+                  {({ input, meta }) => (
+                    <div>
+                      <input
+                        type="text"
+                        {...input}
+                        placeholder="Publishing year"
+                      />
+                      {meta.touched && meta.error && <span>{meta.error}</span>}
+                    </div>
+                  )}
+                </Field>
+              </div>
+              <div className="Submit_container">
+                <button type="submit" className="secondryButton">Cancel</button>
+                <button type="submit" className="primaryButton">Submit</button>
+              </div>
+              </div>
+             
 
-            <div className="Title_container">
-              <Field name="title">
-                {({ input, meta }) => (
-                  <div>
-                    <input type="text" {...input} placeholder="Title" />
-                    {meta.touched && meta.error && <span>{meta.error}</span>}
-                  </div>
-                )}
-              </Field>
-            </div>
-
-            <div className="Year_container">
-              <Field name="year">
-                {({ input, meta }) => (
-                  <div>
-                    <input type="text" {...input} placeholder="Publishing year" />
-                    {meta.touched && meta.error && <span>{meta.error}</span>}
-                  </div>
-                )}
-              </Field>
-            </div>
-
-            <div className="Submit_container">
-              <button type="submit">Submit</button>
-            </div>
-          </form>
-        )}
-      />
+              
+            </form>
+          )}
+        />
+      </div>
     </>
   );
 };
