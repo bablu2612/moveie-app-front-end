@@ -68,3 +68,12 @@ button{
 }
 
 
+
+
+span.error {
+  display: block;
+  text-align: left;
+  color: #ee4f4f;
+  font-size: 12px;
+  line-height: 30px;
+}

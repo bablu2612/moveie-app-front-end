@@ -6,6 +6,7 @@ import { baseUrl } from '../../Constant/constant';
 import logoutLogo from '../../Assets/logout.svg'
 import { useNavigate } from 'react-router-dom';
 import css from './MoviesStyle.css'
+import wavesImage from '../../Assets/bottmwaves.png'
 function Items({ currentItems,navigate }) {
 
   return (
@@ -71,10 +72,12 @@ const MoviesList = ({ itemsPerPage = 6 }) => {
      <div className="blocks moviesPage">
       <div className='container'>
       <div className='headingLogout'>
-        <h2>My Movies</h2>
+        <h2>My Movies
+        <button  onClick={(e)=>{navigate('/create-movie')}}>+</button>
+        </h2>
         <button><strong>Logout</strong><img src={logoutLogo} /> </button>
         </div>
-      {/* <div><button  onClick={(e)=>{navigate('/create-movie')}}>Create Movies</button></div> */}
+      
      
       <Items currentItems={currentItems} navigate={navigate}/>
 
@@ -97,6 +100,9 @@ const MoviesList = ({ itemsPerPage = 6 }) => {
         />
       </div>
       </div>
+      <div className="bottomWaves">
+          <img src={wavesImage}/>
+          </div>
       </div>
     </>
   );
