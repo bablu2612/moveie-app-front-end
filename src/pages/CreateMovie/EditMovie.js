@@ -6,7 +6,7 @@ import { Form, Field } from 'react-final-form';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 
-const CreateMovie = () => {
+const EditMovie = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [message, setMessage] = useState();
@@ -46,7 +46,7 @@ const CreateMovie = () => {
         onSubmit={onSubmit}
         render={({ handleSubmit, form, values }) => (
           <form onSubmit={handleSubmit}>
-            <h2>Create a new movie</h2>
+            <h2>Edit Movies</h2>
             <div className="Poster_container">
               <Field name="poster">
                 {({ input, meta }) => (
@@ -105,4 +105,4 @@ const CreateMovie = () => {
   );
 };
 
-export default CreateMovie;
+export default EditMovie;
