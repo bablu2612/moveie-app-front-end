@@ -23,43 +23,51 @@ function Items({ currentItems }) {
   );
 }
 
-const MoviesList = ({ itemsPerPage = 5 }) => {
+const MoviesList = ({ itemsPerPage = 1 }) => {
   const dispatch = useDispatch();
 
-  // Fetch movies when the component mounts
-  useEffect(() => {
-    dispatch(getAllMovies({ page: 1, limit: itemsPerPage }));
-  }, [dispatch, itemsPerPage]);
-
+  // Getting state from Redux
   const { movieData, currentPage, totalMovies, totalPages } = useSelector(
     (state) => state.movies
   );
 
-  const [itemOffset, setItemOffset] = useState(0);
-  const endOffset = itemOffset + itemsPerPage;
+  // Fetch movies when the component mounts or currentPage/page limit changes
+  useEffect(() => {
+    dispatch(getAllMovies({ page: currentPage, limit: itemsPerPage }));
+  }, [dispatch, currentPage, itemsPerPage]);
+console.log('movieData',movieData)
   const currentItems = movieData?.movies;
-  const pageCount = totalPages;
+  const pageCount = movieData.totalPages;
 
   // Handle page click event for pagination
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % totalMovies;
-    setItemOffset(newOffset);
+
+    // Dispatch to fetch the new set of movies based on the page
     dispatch(getAllMovies({ page: event.selected + 1, limit: itemsPerPage }));
   };
 
   return (
     <>
-      <Items currentItems={currentItems} />
+    <Items currentItems={currentItems} />
+    <div className="pagination-container">
       <ReactPaginate
         breakLabel="..."
         nextLabel="next >"
         onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
+        pageRangeDisplayed={2}
         pageCount={pageCount}
         previousLabel="< previous"
+        containerClassName="pagination-container"
+        pageClassName="pagination-item"
+        pageLinkClassName="pagination-item"
+        activeClassName="selected"
+        previousClassName="pagination-prev"
+        nextClassName="pagination-next"
+        disabledClassName="disabled"
         renderOnZeroPageCount={null}
       />
-    </>
+    </div>
+  </>
   );
 };
 
