@@ -9,8 +9,8 @@ export const loginSubmit = createAsyncThunk("loginSubmit", async (values) => {
 });
 
 export const getAllMovies = createAsyncThunk("getAllMovies", async () => {
-  const res = await axios.get(`${baseUrl}/api/movies?page=1&limit=1`)
-  console.log("responseeee",res)
+  const res = await axios.get(`${baseUrl}/api/movies?page=1&limit=10`)
+  console.log("responseeee>>>>>",res)
   return await res.data
 });
 
