@@ -40,13 +40,21 @@ const CreateMovie = () => {
     formdata.set("poster", posterFile);
     await dispatch(createMovie(formdata));
   };
+
+  const validate = (values) => {
+    const errors = {};
+    if (!values.title) errors.title = "Title is required";
+    if (!values.year) errors.year = "Publishing year is required";
+    if (!posterFile) errors.poster = "Poster is required";
+    return errors;
+  };
   return (
     <>
       {/* {message ? (toast({message})):""} */}
       <div className="blocks createNewMovies">
         <Form
           onSubmit={onSubmit}
-          // validate={validate}
+          validate={validate}
           render={({ handleSubmit, form, values }) => (
             <form onSubmit={handleSubmit}>
               <h2>Create a new movie</h2>
@@ -78,7 +86,7 @@ const CreateMovie = () => {
                   )}
                 </Field>
                 <Field name="poster">
-                  {({ input }) => (
+                  {({ input,meta }) => (
                     <div className="uploadedImage">
                       {posterFile && (
                         <img
@@ -86,8 +94,11 @@ const CreateMovie = () => {
                           alt="Poster preview"
                         />
                       )}
+                                            {meta.touched && meta.error && <span className="error">{meta.error}</span>}
+
                     </div>
                   )}
+                  
                 </Field>
               </div>
               <div className="Submit_container">
