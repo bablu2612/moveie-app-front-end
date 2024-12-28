@@ -13,7 +13,7 @@ export const loginSubmit = createAsyncThunk('loginSubmit', async (values) => {
   return await res.data;
 });
 
-export const getAllMovies = createAsyncThunk('getAllMovies', async ({ page = 1, limit = 5 }) => {
+export const getAllMovies = createAsyncThunk('getAllMovies', async ({ page=1  ,limit=6  }) => {
   console.log('limit>>>>>', page, limit);
 
   const res = await axios.get(`${baseUrl}/api/movies?page=${page}&limit=${limit}`);

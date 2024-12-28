@@ -34,7 +34,7 @@ function Items({ currentItems,navigate }) {
   );
 }
 
-const MoviesList = ({ itemsPerPage = 1 }) => {
+const MoviesList = ({ itemsPerPage = 6 }) => {
   const dispatch = useDispatch();
 
   // Getting state from Redux
@@ -71,7 +71,7 @@ const MoviesList = ({ itemsPerPage = 1 }) => {
           breakLabel="..."
           nextLabel="next >"
           onPageChange={handlePageClick}
-          pageRangeDisplayed={2}
+          pageRangeDisplayed={6}
           pageCount={pageCount}
           previousLabel="< previous"
           containerClassName="pagination-container"

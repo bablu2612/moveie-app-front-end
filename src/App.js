@@ -30,9 +30,9 @@ function App() {
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route 
           path="/" 
-          element={token ? <MoviesList itemsPerPage={1} token={token}/> : <Login setToken={setToken}/>} 
+          element={token ? <MoviesList itemsPerPage={6} token={token}/> : <Login setToken={setToken}/>} 
         />
-        <Route path="movies" element={<MoviesList itemsPerPage={1} token={token}/> } />
+        <Route path="movies" element={<MoviesList itemsPerPage={6} token={token}/> } />
         <Route path="create-movie" element={<CreateMovie />} />
         <Route path="edit-movie/:id" element={<EditMovie />} />
         <Route path="*" element={<NoPage />} />
