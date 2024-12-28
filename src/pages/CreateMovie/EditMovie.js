@@ -1,108 +1,181 @@
 import React, { useEffect, useState } from "react";
 // import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { createMovie, loginSubmit } from "../../Reducer/MovieSlice";
-import { Form, Field } from 'react-final-form';
+import { createMovie, getAllMovies, getMovie, loginSubmit, updateMovie } from "../../Reducer/MovieSlice";
+import { Form, Field } from 'react-final-form'
 import { ToastContainer, toast } from 'react-toastify';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { baseUrl } from "../../Constant/constant";
+import uploadIcon from '../../Assets/file_download_black_24dp 1.png'
 
 const EditMovie = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [message, setMessage] = useState();
-  const { movie, isLoading, isError } = useSelector((state) => state?.movies);
-  const [posterFile, setFilePoster] = useState(null);
 
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const { id } = useParams()
+  const [message, setMessage] = useState()
   useEffect(() => {
-    if (movie && movie?.message) {
-      setMessage(movie?.message);
-      toast(movie?.message);
-    }
-  }, [movie]);
+    dispatch(getMovie({ id }));
+  }, [dispatch, id]);
+
+  const { movie, isLoading, isError } = useSelector((state) => state?.movies)
+  const { updateMovieData } = useSelector((state) => state?.movies)
+
+
+  // const data= useSelector((state) => state?.movies)
+  const [posterFile, setFilePoster] = useState(null)
+  const [title, setTitle] = useState(null)
+  const [year, setYear] = useState(null)
+
 
   if (isLoading) {
-    return <>Loading...</>;
+    return <>Loading...</>
   }
 
+
+  if (updateMovieData && updateMovieData?.message) {
+    // setMessage(updateMovieData?.message)
+
+
+    // navigate('/movies')
+    // toast(movie?.message)
+  }
   const handleFileChange = (e, form) => {
     const file = e.target.files[0]; // Get the selected file
     if (file) {
-      setFilePoster(file);
+      setFilePoster(file)
     }
   };
 
   const onSubmit = async (values, form) => {
-    const formdata = new FormData();
+    const formdata = new FormData()
     for (const [key, value] of Object.entries(values)) {
       formdata.set(key, value);
     }
-    formdata.set("poster", posterFile);
-    await dispatch(createMovie(formdata));
+    // formdata.set("poster", posterFile?posterFile:movie);
+    if (posterFile) {
+      formdata.set("poster", posterFile);
+
+    }
+    dispatch(updateMovie({ id, values: formdata })).then(res => {
+      setFilePoster(null); // Reset the poster file state
+      form.reset();
+
+      navigate('/movies')
+      toast(res.payload.message)
+    });
+
+  }
+
+  const validate = (values) => {
+    const errors = {};
+    if (!values.title) errors.title = "Title is required";
+    if (!values.year) errors.year = "Publishing year is required";
+    // if (!posterFile) errors.poster = "Poster is required";
+    return errors;
   };
 
   return (
     <>
-      <Form
-        onSubmit={onSubmit}
-        render={({ handleSubmit, form, values }) => (
-          <form onSubmit={handleSubmit}>
-            <h2>Edit Movies</h2>
-            <div className="Poster_container">
-              <Field name="poster">
-                {({ input, meta }) => (
-                  <div>
-                    <input
-                      type="file"
-                      {...input}
-                      onChange={(e) => handleFileChange(e, form)}
-                      accept="image/*"
-                    />
-                    {meta.touched && meta.error && <span>{meta.error}</span>}
-                  </div>
-                )}
-              </Field>
+      {/* {message ? (toast({message})):""} */}
+      {movie && (
 
-              {posterFile && (
-                <div>
-                  <img
-                    src={URL.createObjectURL(posterFile)}
-                    alt="Poster preview"
-                    style={{ maxWidth: "200px", maxHeight: "300px", marginTop: "10px" }}
-                  />
+        <div className="blocks createNewMovies">
+          <Form
+            onSubmit={onSubmit}
+            validate={validate}
+            initialValues={{ title: movie?.title || "", year: movie?.year || '' }}
+            render={({ handleSubmit, form, values }) => (
+              <form onSubmit={handleSubmit}>
+                <h2>Create a new movie</h2>
+                <div className="uploadImageBlock">
+                  <div className="Poster_container">
+                    <Field name="poster">
+                      {({ input, meta }) => (
+                        <div className="uploadImageBoxDrag">
+
+                          <input
+                            type="file"
+
+                            {...input}
+                            onChange={(e) => handleFileChange(e, form)}
+                            accept="image/*"
+                            id="fileUpload"
+                          />
+                          <label htmlFor="fileUpload">
+                            <img src={uploadIcon} />
+                            Drop an image here</label>
+                          {meta.touched && meta.error && <span className="error">{meta.error}</span>}
+
+                        </div>
+                      )}
+                    </Field>
+                    <Field name="poster">
+                      {({ input, meta }) => (
+                        <div className="uploadedImage">
+                          {(posterFile || movie?.poster) && (
+                            <img
+                              src={!posterFile ? `${baseUrl}/images/${movie.poster}` : URL.createObjectURL(posterFile)}
+                              alt="Poster preview"
+                            />
+                          )}
+                          {meta.touched && meta.error && <span className="error">{meta.error}</span>}
+
+                        </div>
+                      )}
+
+                    </Field>
+                  </div>
+                  <div className="Submit_container">
+                    <button type="button" className="secondryButton" onClick={() => {
+                      navigate('/movies')
+                    }}>Cancel</button>
+                    <button type="submit" className="primaryButton">Submit</button>
+                  </div>
                 </div>
-              )}
-            </div>
 
-            <div className="Title_container">
-              <Field name="title">
-                {({ input, meta }) => (
-                  <div>
-                    <input type="text" {...input} placeholder="Title" />
-                    {meta.touched && meta.error && <span>{meta.error}</span>}
+                <div className="uploadFieldsBlock">
+                  <div className="Title_container">
+                    <Field name="title">
+                      {({ input, meta }) => (
+                        <div>
+                          <input type="text" {...input} placeholder="Title" />
+                          {meta.touched && meta.error && <span className="error">{meta.error}</span>}
+                        </div>
+                      )}
+                    </Field>
                   </div>
-                )}
-              </Field>
-            </div>
-
-            <div className="Year_container">
-              <Field name="year">
-                {({ input, meta }) => (
-                  <div>
-                    <input type="text" {...input} placeholder="Publishing year" />
-                    {meta.touched && meta.error && <span>{meta.error}</span>}
+                  <div className="Year_container">
+                    <Field name="year">
+                      {({ input, meta }) => (
+                        <div>
+                          <input
+                            type="text"
+                            {...input}
+                            placeholder="Publishing year"
+                          />
+                          {meta.touched && meta.error && <span className="error">{meta.error}</span>}
+                        </div>
+                      )}
+                    </Field>
                   </div>
-                )}
-              </Field>
-            </div>
+                  <div className="Submit_container">
+                    <button type="button" className="secondryButton" onClick={() => {
+                      navigate('/movies')
+                    }}>Cancel</button>
+                    <button type="submit" className="primaryButton">Submit</button>
+                  </div>
+                </div>
 
-            <div className="Submit_container">
-              <button type="submit">Submit</button>
-            </div>
-          </form>
-        )}
-      />
+
+
+              </form>
+            )}
+          />
+        </div>
+      )}
     </>
-  );
+  )
 };
 
 export default EditMovie;

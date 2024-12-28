@@ -43,7 +43,7 @@ function Items({ currentItems,navigate }) {
   );
 }
 
-const MoviesList = ({ itemsPerPage = 6 }) => {
+const MoviesList = ({ itemsPerPage = 6,setToken }) => {
   const dispatch = useDispatch();
 
   // Getting state from Redux
@@ -54,8 +54,7 @@ const MoviesList = ({ itemsPerPage = 6 }) => {
   // Fetch movies when the component mounts or currentPage/page limit changes
   useEffect(() => {
     dispatch(getAllMovies({ page: currentPage, limit: itemsPerPage }));
-  }, [dispatch, currentPage, itemsPerPage]);
-  console.log('movieData', movieData)
+  }, []);
   const currentItems = movieData?.movies;
   const pageCount = movieData.totalPages;
 
@@ -66,7 +65,11 @@ const MoviesList = ({ itemsPerPage = 6 }) => {
     dispatch(getAllMovies({ page: event.selected + 1, limit: itemsPerPage }));
   };
   const navigate=useNavigate()
-
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setToken(null)
+    navigate('/login');
+  };
   return (
     < >
      <div className="blocks moviesPage">
@@ -75,7 +78,7 @@ const MoviesList = ({ itemsPerPage = 6 }) => {
         <h2>My Movies
         <button  onClick={(e)=>{navigate('/create-movie')}}>+</button>
         </h2>
-        <button><strong>Logout</strong><img src={logoutLogo} /> </button>
+        <button onClick={handleLogout} ><strong>Logout</strong><img src={logoutLogo} /> </button>
         </div>
       
      

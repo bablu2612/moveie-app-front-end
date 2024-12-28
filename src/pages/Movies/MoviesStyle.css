@@ -147,7 +147,7 @@
             float: left;
             width: 100%;
             align-items: center;
-
+            z-index: 1;
             li{
                 background: transparent;
                 font-family: Montserrat;

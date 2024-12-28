@@ -64,12 +64,7 @@ const CreateMovie = () => {
                   <Field name="poster">
                     {({ input, meta }) => (
                       <div className="uploadImageBoxDrag">
-                        {/* <input
-                        type="file"
-                        {...input}
-                        onChange={(e) => handleFileChange(e, form)}
-                        accept="image/*"
-                      /> */}
+                       
                         <input
                           type="file"
 
@@ -103,7 +98,9 @@ const CreateMovie = () => {
                   </Field>
                 </div>
                 <div className="Submit_container">
-                  <button type="submit" className="secondryButton">Cancel</button>
+                  <button type="button" className="secondryButton" onClick={() => {
+                    navigate('/movies')
+                  }}>Cancel</button>
                   <button type="submit" className="primaryButton">Submit</button>
                 </div>
               </div>
@@ -134,7 +131,9 @@ const CreateMovie = () => {
                   </Field>
                 </div>
                 <div className="Submit_container">
-                  <button type="submit" className="secondryButton">Cancel</button>
+                  <button type="button" className="secondryButton" onClick={() => {
+                    navigate('/movies')
+                  }}>Cancel</button>
                   <button type="submit" className="primaryButton">Submit</button>
                 </div>
               </div>
@@ -145,10 +144,10 @@ const CreateMovie = () => {
 
           )}
         />
-         <div className="bottomWaves">
-          <img src={wavesImage}/>
-          </div>
-      
+        <div className="bottomWaves">
+          <img src={wavesImage} />
+        </div>
+
       </div>
     </>
   );

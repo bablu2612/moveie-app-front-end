@@ -9,36 +9,29 @@ const header={
 
 export const loginSubmit = createAsyncThunk('loginSubmit', async (values) => {
   const res = await axios.post(`${baseUrl}/api/user/login`, values);
-  console.log('responseeee', res);
   return await res.data;
 });
 
 export const getAllMovies = createAsyncThunk('getAllMovies', async ({ page=1  ,limit=6  }) => {
-  console.log('limit>>>>>', page, limit);
 
   const res = await axios.get(`${baseUrl}/api/movies?page=${page}&limit=${limit}`);
-  console.log('responseeee>>>>>', res);
-
   // Return the full response including the pagination info
   return res.data;
 });
 
 export const createMovie = createAsyncThunk("createMovie", async (values) => {
   const res = await axios.post(`${baseUrl}/api/movies`,values,header)
-  console.log("responseeee",res)
   return await res.data
 });
 
 
 export const getMovie = createAsyncThunk("getMovie", async ({id}) => {
   const res = await axios.get(`${baseUrl}/api/movies/${id}`,header)
-  console.log("responseeee11",res)
   return await res.data
 });
 
-export const updateMovie = createAsyncThunk("updateMovie", async (id,values) => {
+export const updateMovie = createAsyncThunk("updateMovie", async ({id,values}) => {
   const res = await axios.put(`${baseUrl}/api/movies/${id}`,values,header)
-  console.log("responseeee22",res)
   return await res.data
 });
 

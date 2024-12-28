@@ -77,3 +77,11 @@ span.error {
   font-size: 12px;
   line-height: 30px;
 }
+
+
+
+
+/* Style for the toast close button */
+button.Toastify__close-button.Toastify__close-button--light {
+ display: none;
+}
