@@ -7,14 +7,16 @@ import MoviesList from './pages/Movies/Movies';
 import NoPage from './pages/NoPage/NoPage';
 import Login from './pages/Login/Login';
 import CreateMovie from './pages/CreateMovie/CreateMovie';
+import { useState } from 'react';
 
 
 function App() {
+  const [token,setToken]=useState()
   return (
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login setToken={setToken}/>} />
       <Route path="/" element={<Layout />}>
-        <Route path="movies" element={<MoviesList itemsPerPage={4}/>} />
+        <Route path="movies" element={<MoviesList itemsPerPage={1} token={token}/> } />
         <Route path="create-movie" element={<CreateMovie />} />
         <Route path="*" element={<NoPage />} />
       </Route>
