@@ -12,9 +12,11 @@ function Items({ currentItems }) {
           <div key={index} className='container'>
             <div className='row'>
               <div className='card'>
+                <a href={`/movies/${value?._id}`}>
                 <img src={`${baseUrl}/images/${value?.poster}`} alt={value?.title} />
                 <strong>{value?.title}</strong>
                 <strong>{value?.year}</strong>
+                </a>
               </div>
             </div>
           </div>

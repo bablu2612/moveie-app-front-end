@@ -30,6 +30,19 @@ export const createMovie = createAsyncThunk("createMovie", async (values) => {
 });
 
 
+export const getMovie = createAsyncThunk("getMovie", async ({id}) => {
+  const res = await axios.get(`${baseUrl}/api/movies/${id}`,header)
+  console.log("responseeee11",res)
+  return await res.data
+});
+
+export const updateMovie = createAsyncThunk("updateMovie", async (id,values) => {
+  const res = await axios.put(`${baseUrl}/api/movies/${id}`,values,header)
+  console.log("responseeee22",res)
+  return await res.data
+});
+
+
 
 export const movieSlice = createSlice({
   name: 'movies',
@@ -42,18 +55,9 @@ export const movieSlice = createSlice({
     },
     isError: false,
     error: null,
+    movie:{},
+    updateMovieData:{}
   },
-  // extraReducers: (builder) => {
-  //   builder.addCase(loginSubmit.pending, (state) => {
-  //     state.isLoading = true;
-  //   });
-  //   builder.addCase(loginSubmit.fulfilled, (state, action) => {
-  //     state.isLoading = false;
-  //     state.data = action.payload;
-  //   });
-  //   builder.addCase(loginSubmit.rejected, (state) => {
-  //     state.isError = true;
-  //   });
 
 
  extraReducers: (builder) => {
@@ -88,6 +92,30 @@ export const movieSlice = createSlice({
     state.movie = action.payload;
    })
    builder.addCase(createMovie.rejected, (state, action) => {
+    state.isError = true;
+    state.error = action.error.message
+   })
+
+   builder.addCase(getMovie.pending, (state, action) => {
+    state.isLoading = true;
+   })
+   builder.addCase(getMovie.fulfilled, (state, action) => {
+    state.isLoading = false;
+    state.movie = action.payload;
+   })
+   builder.addCase(getMovie.rejected, (state, action) => {
+    state.isError = true;
+    state.error = action.error.message
+   })
+
+   builder.addCase(updateMovie.pending, (state, action) => {
+    state.isLoading = true;
+   })
+   builder.addCase(updateMovie.fulfilled, (state, action) => {
+    state.isLoading = false;
+    state.updateMovieData = action.payload;
+   })
+   builder.addCase(updateMovie.rejected, (state, action) => {
     state.isError = true;
     state.error = action.error.message
    })

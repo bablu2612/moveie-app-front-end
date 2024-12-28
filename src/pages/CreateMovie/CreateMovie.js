@@ -21,10 +21,11 @@ console.log("movie",movie)
   if(movie && movie?.message){
     console.log("movie1",movie)
     setMessage(movie?.message)
-    toast(movie?.message)
+    // toast(movie?.message)
+    return <div>{movie?.message}</div>
     setTimeout(() => {
-
-    }, 3000);
+      movie.message=''
+    }, 5000);
   }
   const handleFileChange = (e,form) => {
     console.log("form",form)

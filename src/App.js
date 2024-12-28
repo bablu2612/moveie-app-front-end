@@ -9,6 +9,7 @@ import Login from './pages/Login/Login';
 import CreateMovie from './pages/CreateMovie/CreateMovie';
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
+import UpdateMovie from './pages/UpdateMovie/UpdateMovie';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route path="movies" element={<MoviesList itemsPerPage={1} token={token}/> } />
         <Route path="create-movie" element={<CreateMovie />} />
+        <Route path="movies/:id" element={<UpdateMovie />} />
         <Route path="*" element={<NoPage />} />
       </Route>
     </Routes>
