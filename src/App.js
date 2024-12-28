@@ -1,0 +1,25 @@
+import logo from './logo.svg';
+// import './App.css';
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from './pages/Layout/Layout';
+import MoviesList from './pages/Movies/Movies';
+import NoPage from './pages/NoPage/NoPage';
+import Login from './pages/Login/Login';
+import CreateMovie from './pages/CreateMovie/CreateMovie';
+
+
+function App() {
+  return (
+      <Routes>
+        <Route path="/login" element={<Login />} />
+      <Route path="/" element={<Layout />}>
+        <Route path="movies" element={<MoviesList itemsPerPage={4}/>} />
+        <Route path="create-movie" element={<CreateMovie />} />
+        <Route path="*" element={<NoPage />} />
+      </Route>
+    </Routes>
+   );
+}
+
+export default App;
