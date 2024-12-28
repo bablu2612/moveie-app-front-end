@@ -59,83 +59,83 @@ const CreateMovie = () => {
             <form onSubmit={handleSubmit}>
               <h2>Create a new movie</h2>
               <div className="uploadImageBlock">
-              <div className="Poster_container">
-                <Field name="poster">
-                  {({ input, meta }) => (
-                    <div className="uploadImageBoxDrag">
-                      {/* <input
+                <div className="Poster_container">
+                  <Field name="poster">
+                    {({ input, meta }) => (
+                      <div className="uploadImageBoxDrag">
+                        {/* <input
                         type="file"
                         {...input}
                         onChange={(e) => handleFileChange(e, form)}
                         accept="image/*"
                       /> */}
-                      <input
-                        type="file"
+                        <input
+                          type="file"
 
-                        {...input}
-                        onChange={(e) => handleFileChange(e, form)}
-                        accept="image/*"
-                        id="fileUpload"
-                      />
-                      <label htmlFor="fileUpload">
-                        <img src={uploadIcon}/>
-                        Drop an image here</label>
-                      {meta.touched && meta.error && <span>{meta.error}</span>}
-
-                    </div>
-                  )}
-                </Field>
-                <Field name="poster">
-                  {({ input,meta }) => (
-                    <div className="uploadedImage">
-                      {posterFile && (
-                        <img
-                          src={URL.createObjectURL(posterFile)}
-                          alt="Poster preview"
+                          {...input}
+                          onChange={(e) => handleFileChange(e, form)}
+                          accept="image/*"
+                          id="fileUpload"
                         />
-                      )}
-                                            {meta.touched && meta.error && <span className="error">{meta.error}</span>}
+                        <label htmlFor="fileUpload">
+                          <img src={uploadIcon} />
+                          Drop an image here</label>
+                        {meta.touched && meta.error && <span className="error">{meta.error}</span>}
 
-                    </div>
-                  )}
-                  
-                </Field>
-              </div>
-              <div className="Submit_container">
-                <button type="submit" className="secondryButton">Cancel</button>
-                <button type="submit" className="primaryButton">Submit</button>
-              </div>
+                      </div>
+                    )}
+                  </Field>
+                  <Field name="poster">
+                    {({ input, meta }) => (
+                      <div className="uploadedImage">
+                        {posterFile && (
+                          <img
+                            src={URL.createObjectURL(posterFile)}
+                            alt="Poster preview"
+                          />
+                        )}
+                        {meta.touched && meta.error && <span className="error">{meta.error}</span>}
+
+                      </div>
+                    )}
+
+                  </Field>
+                </div>
+                <div className="Submit_container">
+                  <button type="submit" className="secondryButton">Cancel</button>
+                  <button type="submit" className="primaryButton">Submit</button>
+                </div>
               </div>
 
               <div className="uploadFieldsBlock">
-              <div className="Title_container">
-                <Field name="title">
-                  {({ input, meta }) => (
-                    <div>
-                      <input type="text" {...input} placeholder="Title" />
-                      {meta.touched && meta.error && <span>{meta.error}</span>}
-                    </div>
-                  )}
-                </Field>
-              </div>
-              <div className="Year_container">
-                <Field name="year">
-                  {({ input, meta }) => (
-                    <div>
-                      <input
-                        type="text"
-                        {...input}
-                        placeholder="Publishing year"
-                      />
-                      {meta.touched && meta.error && <span>{meta.error}</span>}
-                    </div>
-                  )}
-                </Field>
-              </div>
-              <div className="Submit_container">
-                <button type="submit" className="secondryButton">Cancel</button>
-                <button type="submit" className="primaryButton">Submit</button>
-              </div>
+                <div className="Title_container">
+                  <Field name="title">
+                    {({ input, meta }) => (
+                      <div>
+                        <input type="text" {...input} placeholder="Title" />
+                        {meta.touched && meta.error && <span className="error">{meta.error}</span>}
+                      </div>
+                    )}
+                  </Field>
+                </div>
+                <div className="Year_container">
+                  <Field name="year">
+                    {({ input, meta }) => (
+                      <div>
+                        <input
+                          type="text"
+                          {...input}
+                          placeholder="Publishing year"
+                        />
+                        {meta.touched && meta.error && <span className="error">{meta.error}</span>}
+                      </div>
+                    )}
+                  </Field>
+                </div>
+                <div className="Submit_container">
+                  <button type="submit" className="secondryButton">Cancel</button>
+                  <button type="submit" className="primaryButton">Submit</button>
+                </div>
               </div>
 
 
