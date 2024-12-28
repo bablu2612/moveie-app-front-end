@@ -71,17 +71,17 @@ const CreateMovie = () => {
                       /> */}
                       <input
                         type="file"
-                        
+
                         {...input}
                         onChange={(e) => handleFileChange(e, form)}
-                        accept="image/*"                    
+                        accept="image/*"
                         id="fileUpload"
                       />
                       <label htmlFor="fileUpload">
                         <img src={uploadIcon}/>
                         Drop an image here</label>
                       {meta.touched && meta.error && <span>{meta.error}</span>}
-                     
+
                     </div>
                   )}
                 </Field>
@@ -137,9 +137,9 @@ const CreateMovie = () => {
                 <button type="submit" className="primaryButton">Submit</button>
               </div>
               </div>
-             
 
-              
+
+
             </form>
           )}
         />

@@ -23,9 +23,11 @@ function Items({ currentItems,navigate }) {
                 </svg>
               </div>
               <div className='card'>
+                <a href={`/movies/${value?._id}`}>
                 <img src={`${baseUrl}/images/${value?.poster}`} alt={value?.title} />
                 <strong>{value?.title}</strong>
                 <strong>{value?.year}</strong>
+                </a>
               </div>
             </div>
           </div>
