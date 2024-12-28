@@ -17,6 +17,7 @@ const CreateMovie = () => {
     if (movie && movie?.message) {
       setMessage(movie?.message);
       toast(movie?.message);
+      navigate('/movies')
     }
   }, [movie]);
 
