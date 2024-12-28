@@ -11,3 +11,54 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/* Style for the entire pagination container */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Style for individual page buttons */
+.pagination-container .pagination-item {
+  display: inline-block;
+  margin: 0 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  transition: background-color 0.3s;
+}
+
+/* Highlight the current page button */
+.pagination-container .pagination-item.selected {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+/* Hover effect for page buttons */
+.pagination-container .pagination-item:hover {
+  background-color: #f1f1f1;
+}
+
+/* Style for the "next" and "previous" buttons */
+.pagination-container .pagination-next,
+.pagination-container .pagination-prev {
+  font-weight: bold;
+  padding: 10px 15px;
+}
+
+/* Style for the disabled state of next/prev buttons */
+.pagination-container .pagination-prev.disabled,
+.pagination-container .pagination-next.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Add ellipsis style */
+.pagination-container .pagination-ellipsis {
+  padding: 10px;
+  color: #007bff;
+  cursor: pointer;
+}
