@@ -8,7 +8,7 @@ const Layout = () => {
     const navigate=useNavigate()
   return (
     <>
-      <nav>
+      {/* <nav>
         <ul>
           <li>
             <button onClick={(e)=>{navigate('/movies')}} >My Movies</button>
@@ -21,7 +21,7 @@ const Layout = () => {
             <button><strong>Logout</strong><img src={logoutLogo} /> </button>
           </li>
         </ul>
-      </nav>
+      </nav> */}
 
       <Outlet />
     </>

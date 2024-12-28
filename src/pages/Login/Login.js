@@ -3,33 +3,28 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSubmit } from "../../Reducer/MovieSlice";
 import { Form, Field } from 'react-final-form'
-// import "react-toastify/dist/ReactToastify.css"
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import css from './LoginStyle.css'
 import wavesImage from '../../Assets/bottmwaves.png'
 const Login = ({setToken}) => {
   const dispatch = useDispatch()
-const navigate=useNavigate()
+  const navigate=useNavigate()
   const [message,setMessage]=useState()
   const {data,isLoading,isError} = useSelector((state) => state?.movies)
-  // const {message,token} = data
-  // console.log("state",data)
-  // console.log("state11111",message,token)
+
   if(isLoading){
     return <>Loading...</>
   }
 
-
-    if(data && data?.message){
-      console.log("meeee11",message)
-      setMessage(data?.message)
-      setToken(data?.token)
-      localStorage.setItem('token', data?.token);
-      setTimeout(() => {
-       navigate('/movies')
-      }, 3000);
-    }
+  if(data && data?.message){
+    setMessage(data?.message)
+    setToken(data?.token)
+    localStorage.setItem('token', data?.token);
+    setTimeout(() => {
+      navigate('/movies')
+    }, 3000);
+  }
 
 
   const onSubmit = async(values)=>{
@@ -41,7 +36,7 @@ const navigate=useNavigate()
       <>
       <div className="blocks">
       {message ? (toast({message})):""}
-       <ToastContainer />
+       {/* <ToastContainer /> */}
       <h1>Sign in</h1>
         <Form
             onSubmit={onSubmit}
