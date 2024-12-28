@@ -323,10 +323,10 @@
 
     @media screen and (width < 767px){
 
-        /* form{
+        form{
             padding: 0px 35px 0 35px;
             max-width: 366px;
-        } */
+        }
         display: block;
     
     }
