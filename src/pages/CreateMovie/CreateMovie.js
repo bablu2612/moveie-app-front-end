@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 // import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { createMovie, loginSubmit } from "../../Reducer/MovieSlice";
-import { Form, Field } from "react-final-form";
-import { ToastContainer, toast } from "react-toastify";
+import { Form, Field } from 'react-final-form';
+import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import uploadIcon from '../../Assets/file_download_black_24dp 1.png'
 const CreateMovie = () => {
@@ -11,21 +11,20 @@ const CreateMovie = () => {
   const navigate = useNavigate();
   const [message, setMessage] = useState();
   const { movie, isLoading, isError } = useSelector((state) => state?.movies);
-  // const data= useSelector((state) => state?.movies)
   const [posterFile, setFilePoster] = useState(null);
-  console.log("movie", movie);
+
+  useEffect(() => {
+    if (movie && movie?.message) {
+      setMessage(movie?.message);
+      toast(movie?.message);
+    }
+  }, [movie]);
+
   if (isLoading) {
     return <>Loading...</>;
   }
 
-  if (movie && movie?.message) {
-    console.log("movie1", movie);
-    setMessage(movie?.message);
-    toast(movie?.message);
-    setTimeout(() => {}, 3000);
-  }
   const handleFileChange = (e, form) => {
-    console.log("form", form);
     const file = e.target.files[0]; // Get the selected file
     if (file) {
       setFilePoster(file);
@@ -34,7 +33,6 @@ const CreateMovie = () => {
 
   const onSubmit = async (values, form) => {
     const formdata = new FormData();
-
     for (const [key, value] of Object.entries(values)) {
       formdata.set(key, value);
     }
