@@ -1,6 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { baseUrl } from '../Constant/constant';
 import axios from 'axios'
+const token=localStorage.getItem('token')
+const header={
+  headers: {
+  'Authorization': 'Bearer ' + token
+}}
 
 export const loginSubmit = createAsyncThunk("loginSubmit", async (values) => {
   const res = await axios.post(`${baseUrl}/api/user/login`,values)
@@ -14,6 +19,14 @@ export const getAllMovies = createAsyncThunk("getAllMovies", async () => {
   return await res.data
 });
 
+export const createMovie = createAsyncThunk("createMovie", async (values) => {
+  const res = await axios.post(`${baseUrl}/api/movies`,values,header)
+  console.log("responseeee",res)
+  return await res.data
+});
+
+
+
 export const movieSlice = createSlice({
 
   name: 'movies',
@@ -22,6 +35,7 @@ initialState: {
   isLoading: false,
   data: [],
   movieData: [],
+  movie: {},
   isError: false,
   error:null
  },
@@ -45,6 +59,18 @@ initialState: {
     state.movieData = action.payload;
    })
    builder.addCase(getAllMovies.rejected, (state, action) => {
+    state.isError = true;
+    state.error = action.error.message
+   })
+
+   builder.addCase(createMovie.pending, (state, action) => {
+    state.isLoading = true;
+   })
+   builder.addCase(createMovie.fulfilled, (state, action) => {
+    state.isLoading = false;
+    state.movie = action.payload;
+   })
+   builder.addCase(createMovie.rejected, (state, action) => {
     state.isError = true;
     state.error = action.error.message
    })

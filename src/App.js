@@ -8,11 +8,13 @@ import NoPage from './pages/NoPage/NoPage';
 import Login from './pages/Login/Login';
 import CreateMovie from './pages/CreateMovie/CreateMovie';
 import { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 
 function App() {
   const [token,setToken]=useState()
   return (
+    <>
       <Routes>
         <Route path="/login" element={<Login setToken={setToken}/>} />
       <Route path="/" element={<Layout />}>
@@ -21,6 +23,8 @@ function App() {
         <Route path="*" element={<NoPage />} />
       </Route>
     </Routes>
+    <ToastContainer/>
+    </>
    );
 }
 
