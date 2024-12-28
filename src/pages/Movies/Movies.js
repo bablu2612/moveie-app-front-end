@@ -5,16 +5,17 @@ import { getAllMovies } from '../../Reducer/MovieSlice'; // Update with your act
 import { baseUrl } from '../../Constant/constant';
 import logoutLogo from '../../Assets/logout.svg'
 import { useNavigate } from 'react-router-dom';
-
+import css from './MoviesStyle.css'
 function Items({ currentItems,navigate }) {
 
   return (
     <>
+    <div className='moviesCardBlock'>
       {currentItems &&
         currentItems.map((value, index) => (
-          <div key={index} className='container'>
+          <div key={index} className='movieCard_'>
             <div className='row'>
-              <div onClick={()=>{
+              <div className='editBtn' onClick={()=>{
                 navigate(`/edit-movie/${value._id}`)
               }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="80px" height="80px" viewBox="0 0 24 24" fill="none">
@@ -23,13 +24,20 @@ function Items({ currentItems,navigate }) {
                 </svg>
               </div>
               <div className='card'>
-                <img src={`${baseUrl}/images/${value?.poster}`} alt={value?.title} />
-                <strong>{value?.title}</strong>
-                <strong>{value?.year}</strong>
+                <div className='movieBannerImg'>
+                      <img src={`${baseUrl}/images/${value?.poster}`} alt={value?.title} />
+                  </div>
+                  <div className='movieInfo'>
+                        <strong>{value?.title}</strong>
+                      <strong className='yearMovie'>{value?.year}</strong>
+                  </div>
+                
               </div>
             </div>
           </div>
         ))}
+        <div className='clearfix'></div>
+        </div>
     </>
   );
 }
@@ -59,21 +67,25 @@ const MoviesList = ({ itemsPerPage = 6 }) => {
   const navigate=useNavigate()
 
   return (
-    <>
-      <div>
-        <h1>My Movies</h1>
+    < >
+     <div className="blocks moviesPage">
+      <div className='container'>
+      <div className='headingLogout'>
+        <h2>My Movies</h2>
         <button><strong>Logout</strong><img src={logoutLogo} /> </button>
         </div>
-      <div><button  onClick={(e)=>{navigate('/create-movie')}}>Create Movies</button></div>
+      {/* <div><button  onClick={(e)=>{navigate('/create-movie')}}>Create Movies</button></div> */}
+     
       <Items currentItems={currentItems} navigate={navigate}/>
+
       <div className="pagination-container">
         <ReactPaginate
           breakLabel="..."
-          nextLabel="next >"
+          nextLabel="Next"
           onPageChange={handlePageClick}
           pageRangeDisplayed={6}
           pageCount={pageCount}
-          previousLabel="< previous"
+          previousLabel="Prev"
           containerClassName="pagination-container"
           pageClassName="pagination-item"
           pageLinkClassName="pagination-item"
@@ -83,6 +95,8 @@ const MoviesList = ({ itemsPerPage = 6 }) => {
           disabledClassName="disabled"
           renderOnZeroPageCount={null}
         />
+      </div>
+      </div>
       </div>
     </>
   );

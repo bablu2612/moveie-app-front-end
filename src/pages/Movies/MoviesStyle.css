@@ -1,0 +1,176 @@
+.blocks {
+    &.moviesPage {
+        display: block;
+
+        .container {
+            max-width: calc(1440px - 240px);
+            width: 100%;
+            margin: auto;
+            padding: 0 15px;
+        }
+
+        .headingLogout {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+
+            h2 {
+                color: #FFFFFF;
+                font-family: Montserrat;
+                font-size: 48px;
+                font-weight: 600;
+                line-height: 56px;
+                text-align: center;
+                text-underline-position: from-font;
+                text-decoration-skip-ink: none;
+                @media screen and (width < 767px){
+                    font-size: 32px;
+                }
+
+            }
+
+            button {
+                max-width: max-content;
+                background: transparent;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+        .moviesCardBlock {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            .movieCard_ {
+                width: 100%;
+                max-width: calc(100% / 4 - 18px);
+                float: left;
+                position: relative;
+                background: #092C39;
+                padding: 8px;
+                border-radius: 12px;
+                .editBtn {
+                    opacity: 0;
+                    position: absolute;
+                    max-width: 30px;
+                    height: 30px;
+                    right: 16px;
+                    top: 16px;
+                    cursor: pointer;
+                    z-index: 9;
+                    svg {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+                .card{
+                    .movieBannerImg{
+                        padding-top: 140%;
+                        position: relative;
+                        img{
+                            height: 388px;
+                            border-radius: 12px;
+                            overflow: hidden;
+                            width: 100%;
+                            object-fit: cover;
+                            position: absolute;
+                            top: 0;
+                            width: 100%;
+                            height: 100%;
+                        }
+                        @media screen and (width < 767px){
+                            height: 246px;
+                            overflow: hidden;
+                        }
+                    }
+                    .movieInfo {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 8px;
+                        padding: 16px 10px;
+                        strong{                         
+                        font-family: Montserrat;
+                        font-size: 20px;
+                        font-weight: 500;
+                        line-height: 32px;
+                        text-align: left;
+                        text-underline-position: from-font;
+                        text-decoration-skip-ink: none;
+                        color: #ffffff;
+                        &.yearMovie{
+                            color: #ffffff;      
+                            font-family: Montserrat;
+                            font-size: 14px;
+                            font-weight: 400;
+                            line-height: 24px;
+                            text-align: left;
+                            text-underline-position: from-font;
+                            text-decoration-skip-ink: none;
+
+                        }
+
+                        }
+                    }
+                }
+                &:hover{
+                    .editBtn {
+                        opacity: 1;}
+                }
+            }
+            @media screen and (width < 992px){
+                .movieCard_{
+                    max-width: calc(100% / 3 - 18px);
+                }
+            }
+            @media screen and (width < 575px){
+                gap: 40px 20px;
+                .movieCard_{
+                    max-width: calc(100% / 2 - 12px);
+                }
+            }
+        }
+        .pagination-container {
+            float: left;
+            width: 100%;
+            align-items: center;
+
+            li{
+                background: transparent;
+                font-family: Montserrat;
+                font-size: 16px;
+                font-weight: 700;
+                line-height: 24px;
+                text-align: center;
+                text-underline-position: from-font;
+                text-decoration-skip-ink: none;
+                color: #fff;
+                list-style: none;
+                &.pagination-item{
+                    padding:0;
+                    border: 0;
+                    
+                    a{
+                        background: #092C39;
+                        border: 0;
+                        padding: 0;
+                        width: 32px;
+                        height: 32px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin: 0;
+                    }
+                    
+                }
+                &.selected{
+                   border: 0; 
+                  a{
+                    margin: 0;
+                    background-color: #2BD17E;
+                  }
+                }
+            }
+        }
+    }
+}
