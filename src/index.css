@@ -62,3 +62,11 @@ code {
   color: #007bff;
   cursor: pointer;
 }
+
+*{
+box-sizing: border-box;
+}
+body{
+  height: 100%;
+  font-family: "Montserrat", serif;
+}
