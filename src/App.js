@@ -25,8 +25,10 @@ function App() {
     }
   }, []);
   useEffect(() => {
-    if (token && window.location.pathname === '/login') {
-      navigate('/movies'); // Redirect to /movies if token exists
+    if (!token && window.location.pathname !== '/login') {
+      navigate('/login');
+    } else if (token && window.location.pathname === '/login') {
+      navigate('/movies');
     }
   }, [token, navigate]);
   
