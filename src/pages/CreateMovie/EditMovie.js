@@ -87,7 +87,7 @@ const EditMovie = () => {
             initialValues={{ title: movie?.title || "", year: movie?.year || '' }}
             render={({ handleSubmit, form, values }) => (
               <form onSubmit={handleSubmit}>
-                <h2>Create a new movie</h2>
+                <h2>Edit</h2>
                 <div className="uploadImageBlock">
                   <div className="Poster_container">
                     <Field name="poster">

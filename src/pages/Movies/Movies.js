@@ -43,7 +43,7 @@ function Items({ currentItems,navigate }) {
   );
 }
 
-const MoviesList = ({ itemsPerPage = 6,setToken }) => {
+const MoviesList = ({ itemsPerPage = 6,setToken,token }) => {
   const dispatch = useDispatch();
 
   // Getting state from Redux
@@ -53,7 +53,7 @@ const MoviesList = ({ itemsPerPage = 6,setToken }) => {
 
   // Fetch movies when the component mounts or currentPage/page limit changes
   useEffect(() => {
-    dispatch(getAllMovies({ page: currentPage, limit: itemsPerPage }));
+    dispatch(getAllMovies({ page: currentPage, limit: itemsPerPage,Accesstoken: token  }));
   }, []);
   const currentItems = movieData?.movies;
   const pageCount = movieData.totalPages;
@@ -62,7 +62,7 @@ const MoviesList = ({ itemsPerPage = 6,setToken }) => {
   const handlePageClick = (event) => {
 
     // Dispatch to fetch the new set of movies based on the page
-    dispatch(getAllMovies({ page: event.selected + 1, limit: itemsPerPage }));
+    dispatch(getAllMovies({ page: event.selected + 1, limit: itemsPerPage,Accesstoken: token }));
   };
   const navigate=useNavigate()
   const handleLogout = () => {
