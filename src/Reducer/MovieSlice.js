@@ -14,7 +14,7 @@ export const loginSubmit = createAsyncThunk('loginSubmit', async (values) => {
 
 export const getAllMovies = createAsyncThunk('getAllMovies', async ({ page=1  ,limit=6  }) => {
 
-  const res = await axios.get(`${baseUrl}/api/movies?page=${page}&limit=${limit}`);
+  const res = await axios.get(`${baseUrl}/api/movies?page=${page}&limit=${limit}`,header);
   // Return the full response including the pagination info
   return res.data;
 });
